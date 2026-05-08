@@ -1,53 +1,40 @@
-<!-- BACKGROUND -->
-<div align="center" 
-     style="
-     background-image: url('https://raw.githubusercontent.com/nguyennan12/Nguyen-An-Profile/main/particles.png');
-     background-size: cover;
-     background-position: center;
-     padding: 40px;
-     border-radius: 20px;
-     ">
-
-<h2 align="center" style="color: white;">GitHub Profile</h2>
-
-<!-- STATS + LANGUAGES -->
-<div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-
-<!-- STATS -->
-<picture>
-  <source 
-    srcset="https://github-readme-stats-sigma-five.vercel.app/api?username=nguyennan12&show_icons=true&theme=tokyonight&border_radius=20&custom_title=Na%20Na%20GitHub" 
-    media="(prefers-color-scheme: dark)" />
-  <source 
-    srcset="https://github-readme-stats-sigma-five.vercel.app/api?username=nguyennan12&show_icons=true&theme=default&border_radius=20&custom_title=Na%20Na%20GitHub" 
-    media="(prefers-color-scheme: light)" />
-  <img height="170" 
-    src="https://github-readme-stats-sigma-five.vercel.app/api?username=nguyennan12&show_icons=true" />
-</picture>
-
-<!-- LANGUAGES -->
-<picture>
-  <source 
-    srcset="https://github-readme-stats-sigma-five.vercel.app/api/top-langs?username=nguyennan12&layout=compact&theme=tokyonight&langs_count=6&border_radius=20" 
-    media="(prefers-color-scheme: dark)" />
-  <source 
-    srcset="https://github-readme-stats-sigma-five.vercel.app/api/top-langs?username=nguyennan12&layout=compact&theme=default&langs_count=6&border_radius=20" 
-    media="(prefers-color-scheme: light)" />
-  <img height="170" 
-    src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs?username=nguyennan12&layout=compact" />
-</picture>
-
-</div>
-
-</div>
-
----
-
-<h2 align="center">🚀 Tech Stack</h2>
+<h1 align="center">I'm a Full Stack Engineer</h1>
 
 <div align="center">
-
-<img src="https://skillicons.dev/icons?i=react,html,css,cpp,c,js,nodejs,mysql,mongodb" />
-
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=70D4FF&center=true&vCenter=true&width=500&height=30&lines=React%20%C2%B7Node.js%20%C2%B7%20Express%3BMongoDB%20%C2%B7%20Redis%3BAWS%20%C2%B7%20Docker%20" alt="Typing SVG" />
 </div>
 
+<p align="center">I design and build end-to-end products — from pixel-perfect UIs to scalable distributed backends. I care deeply about developer experience, performance, and clean architecture.</p>
+
+<div align="center">
+  <img src="https://github-profile-maker.vercel.app/api/divider?bgType=gradient&thickness=4&alignment=center&bgSolidColor=CBA6F7&bgStartColor=709BFF&bgEndColor=42E0FF&bgGradientDirection=horizontal" alt="Divider" />
+</div>
+
+<h2 align="center">Frontend 🎨</h2>
+
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=html,css,js,react,vite,materialui&perline=10&theme=dark" />
+</div>
+
+<h2 align="center">Backend & Databases 🗄️</h2>
+
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=nodejs,express,mysql,mongodb,redis,java&perline=10&theme=dark" />
+</div>
+
+<h2 align="center">Cloud & DevOps ☁️</h2>
+
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=aws,docker,nginx,github,git,linux&perline=10&theme=dark" />
+</div>
+
+<div align="center">
+  <img src="https://github-profile-maker.vercel.app/api/divider?bgType=gradient&thickness=4&alignment=center&bgSolidColor=CBA6F7&bgStartColor=709BFF&bgEndColor=42E0FF&bgGradientDirection=horizontal" alt="Divider" />
+</div>
+
+<h2 align="center">GitHub Stats 📊</h2>
+
+<div align="center">
+  <img src="https://github-profile-maker.vercel.app/api/stats?username=nguyennan12&theme=github&layout=standard&show_icons=true&hide_border=false&hide_title=false&hide_rank=false&border_radius=12" alt="GitHub Stats" width="49%" height="230" style="margin-right: 12px;" />
+  <img src="https://github-profile-maker.vercel.app/api/streak?username=nguyennan12&theme=github&hide_border=false&border_radius=10" alt="GitHub Streak" width="49%" height="230" style="" />
+</div>
