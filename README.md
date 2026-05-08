@@ -9,10 +9,6 @@
 <h2 align="center">Tech Stack</h2>
 
 <div align="center">
-  <img src="https://github-profile-maker.vercel.app/api/divider?bgType=gradient&thickness=4&alignment=center&bgSolidColor=CBA6F7&bgStartColor=709BFF&bgEndColor=42E0FF&bgGradientDirection=horizontal" alt="Divider" />
-</div>
-
-<div align="center">
   <img src="https://skillicons.dev/icons?i=html,css,js,react,materialui,c,cpp,java,vite&perline=10&theme=dark" />
 </div>
 
@@ -20,8 +16,6 @@
   <img src="https://skillicons.dev/icons?i=nodejs,express,mysql,mongodb,redis,aws,docker&perline=10&theme=dark" />
 </div>
 
-<div align="center">
-  <img src="https://github-profile-maker.vercel.app/api/divider?bgType=gradient&thickness=4&alignment=center&bgSolidColor=CBA6F7&bgStartColor=709BFF&bgEndColor=42E0FF&bgGradientDirection=horizontal" alt="Divider" />
 </div>
 
 <h2 align="center">GitHub Stats</h2>
