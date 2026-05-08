@@ -10,23 +10,7 @@
   <img src="https://github-profile-maker.vercel.app/api/divider?bgType=gradient&thickness=4&alignment=center&bgSolidColor=CBA6F7&bgStartColor=709BFF&bgEndColor=42E0FF&bgGradientDirection=horizontal" alt="Divider" />
 </div>
 
-<h2 align="center">Frontend 🎨</h2>
 
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=html,css,js,react,vite,materialui&perline=10&theme=dark" />
-</div>
-
-<h2 align="center">Backend & Databases 🗄️</h2>
-
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=nodejs,express,mysql,mongodb,redis,java&perline=10&theme=dark" />
-</div>
-
-<h2 align="center">Cloud & DevOps ☁️</h2>
-
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=aws,docker,nginx,github,git,linux&perline=10&theme=dark" />
-</div>
 
 <div align="center">
   <img src="https://github-profile-maker.vercel.app/api/divider?bgType=gradient&thickness=4&alignment=center&bgSolidColor=CBA6F7&bgStartColor=709BFF&bgEndColor=42E0FF&bgGradientDirection=horizontal" alt="Divider" />
