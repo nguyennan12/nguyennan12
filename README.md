@@ -1,29 +1,17 @@
-<h1 align="center">My Profile Github</h1>
-
-
-<div align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=22&duration=3000&pause=1000&color=70D4FF&center=true&vCenter=true&width=500&height=30&lines=Du%20%C2%B7%20Nguyen%20%C2%B7%20An%3B12%20%C2%B7%20%2004%20%C2%B7%20%202006%3BHello%20%C2%B7%20Everyone%20" alt="Typing SVG" />
-</div>
-
-<p align="center">I'm an IT student passionate about software development, with a focus on backend engineering and building reliable, scalable systems. I'm continuously learning and gaining practical experience to grow into a well-rounded software engineer.
+<p align="center">
+  <img src="./profile-banner.svg" width="100%" alt="Profile banner"/>
 </p>
 
-<h2 align="center">Tech Stack</h2>
+<p align="center">
+  <a href="https://www.linkedin.com/in/du-nguyen-an-4a0965358"><img src="https://img.shields.io/badge/LINKEDIN-0A66C2?style=flat-square&logo=linkedin&logoColor=white&labelColor=33475b" height="42"/></a>
+  &nbsp;
+  <a href="https://github.com/nguyennan12"><img src="https://img.shields.io/badge/GITHUB-181717?style=flat-square&logo=github&logoColor=white&labelColor=33475b" height="42"/></a>
+  &nbsp;
+  <a href="https://huggingface.co/"><img src="https://img.shields.io/badge/HUGGING%20FACE-FFD21E?style=flat-square&logo=huggingface&logoColor=black&labelColor=b8860b" height="42"/></a>
+  &nbsp;
+  <a href="mailto:youremail@gmail.com"><img src="https://img.shields.io/badge/GMAIL-EA4335?style=flat-square&logo=gmail&logoColor=white&labelColor=33475b" height="42"/></a>
+</p>
 
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=html,css,js,react,cs,c,cpp,java,vite&perline=10&theme=dark" />
-</div>
-
-<div align="center">
-  <img src="https://skillicons.dev/icons?i=nodejs,express,mysql,mongodb,redis,aws,docker&perline=10&theme=dark" />
-</div>
-
-</div>
-
-<h2 align="center">GitHub Stats</h2>
-
-<div align="center">
-  <img src="https://github-profile-maker.vercel.app/api/stats?username=nguyennan12&theme=github&layout=standard&show_icons=true&hide_border=false&hide_title=false&hide_rank=false&border_radius=12" alt="GitHub Stats" width="49%" height="230" style="margin-right: 12px;" />
-  <img src="https://github-profile-maker.vercel.app/api/streak?username=nguyennan12&theme=github&hide_border=false&border_radius=10" alt="GitHub Streak" width="49%" height="230" style="" />
-</div>
-
+<p align="center">
+  <img src="./profile-stats.svg" width="100%" alt="Profile stats"/>
+</p>
