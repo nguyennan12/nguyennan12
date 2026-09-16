@@ -15,3 +15,7 @@
 <p align="center">
   <img src="./profile-stats.svg" width="100%" alt="Profile stats"/>
 </p>
+
+<p align="center">
+  <img src="./tech-stack.svg" width="100%" alt="Technical stack"/>
+</p>
