@@ -1,7 +1,6 @@
 <p align="center">
   <img src="./profile-banner.svg" width="100%" alt="Profile banner"/>
 </p>
-<!--  -->
 <p align="center">
   <a href="https://www.linkedin.com/in/du-nguyen-an-4a0965358"><img src="./linkedin-badge.svg" height="60"/></a>
   &nbsp;
