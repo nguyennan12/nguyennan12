@@ -39,6 +39,7 @@ STATS = [
     ("LONGEST STREAK",      63,  "#6b46c1", "MAR 16 - MAY 17 2026"),
     ("PUBLIC REPOS",        17,  "#3a8a5c", None),
 ]
+TOTAL_FROM_YEAR = 2025   # tổng contributions tính từ 1/1 năm này tới nay (None = chỉ năm hiện tại)
 MAX_SECONDS = 1.8     # số lớn nhất chạy tối đa bấy nhiêu giây
 SECONDS_PER_UNIT = 0.04  # số nhỏ thì chạy ngắn hơn (mỗi đơn vị ~0.04s), tối thiểu 0.6s
 FPS = 60              # tốc độ đổi số tối đa (khung/giây)
@@ -200,14 +201,20 @@ def stats(items=STATS):
   <rect class="a growx" style="--d:{d + .15:.2f}s;--t:{count_seconds(value):.2f}s;animation-timing-function:linear" x="{cx - 50}" y="164" width="100" height="4" rx="2" fill="{color}"/>
 '''
         if caption:
-            s += (f'  <text class="a fade" style="--d:{d + .15 + count_seconds(value):.2f}s;--t:.8s" x="{cx}" y="200" '
-                  f'text-anchor="middle" font-size="12" fill="#9aacba">{caption}</text>\n')
+            lines = caption if isinstance(caption, (list, tuple)) else [caption]
+            y0 = 200 if len(lines) == 1 else 194
+            for j, line in enumerate(lines):
+                s += (f'  <text class="a fade" style="--d:{d + .15 + count_seconds(value) + .15 * j:.2f}s;--t:.8s" '
+                      f'x="{cx}" y="{y0 + 16 * j}" text-anchor="middle" font-size="12" fill="#9aacba">{line}</text>\n')
     return s + "</svg>\n"
 
 
 # ─────────────────────── LẤY SỐ THẬT TỪ GITHUB ───────────────────────
+REPO_LISTS = ("commitContributionsByRepository", "pullRequestContributionsByRepository",
+              "pullRequestReviewContributionsByRepository", "issueContributionsByRepository")
+BY_REPO = "repository { nameWithOwner owner { login } } contributions(first: 1) { totalCount }"
 QUERY = """
-query($login: String!, $from: DateTime!) {
+query($login: String!, $from: DateTime!, $jan1: DateTime!) {
   user(login: $login) {
     followers { totalCount }
     repositories(privacy: PUBLIC, ownerAffiliations: OWNER) { totalCount }
@@ -216,15 +223,28 @@ query($login: String!, $from: DateTime!) {
         weeks { contributionDays { date contributionCount } }
       }
     }
+    ytd: contributionsCollection(from: $jan1) {
+      commitContributionsByRepository(maxRepositories: 100) { %(r)s }
+      pullRequestContributionsByRepository(maxRepositories: 100) { %(r)s }
+      pullRequestReviewContributionsByRepository(maxRepositories: 100) { %(r)s }
+      issueContributionsByRepository(maxRepositories: 100) { %(r)s }
+    }
   }
 }
-"""
+""" % {"r": BY_REPO}
 
 
-def gh_graphql(login, token):
-    since = datetime.now(timezone.utc) - timedelta(days=364)      # API cho tối đa 1 năm
-    body = json.dumps({"query": QUERY, "variables": {
-        "login": login, "from": since.strftime("%Y-%m-%dT00:00:00Z")}}).encode()
+def gh_graphql(login, token, past_years=()):
+    now = datetime.now(timezone.utc)
+    since = now - timedelta(days=364)                             # API cho tối đa 1 năm
+    by_repo = "".join(f" {k}(maxRepositories: 100) {{ {BY_REPO} }}" for k in REPO_LISTS)
+    extra = "".join(
+        f'\n    y{y}: contributionsCollection(from: "{y}-01-01T00:00:00Z", to: "{y}-12-31T23:59:59Z") '
+        f'{{ contributionCalendar {{ totalContributions }}{by_repo} }}' for y in past_years)
+    query = QUERY.replace("    followers { totalCount }", "    followers { totalCount }" + extra)
+    body = json.dumps({"query": query, "variables": {
+        "login": login, "from": since.strftime("%Y-%m-%dT00:00:00Z"),
+        "jan1": f"{now.year}-01-01T00:00:00Z"}}).encode()
     req = urllib.request.Request(
         "https://api.github.com/graphql", data=body,
         headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json",
@@ -244,11 +264,11 @@ def span(a, b):                                # "MAR 16 - MAY 17 2026"
     return f"{fmt(a)} - {fmt(b)} {b.year}"
 
 
-def compute_stats(days, followers, repos):
+def compute_stats(days, followers, repos, others=(0, 0), past_total=0, from_year=None):
     """days: [(date, count)] theo thứ tự thời gian, ngày cuối = hôm nay."""
     today = days[-1][0]
     jan1 = date(today.year, 1, 1)
-    total = sum(c for d, c in days if d >= jan1)
+    total = past_total + sum(c for d, c in days if d >= jan1)
 
     # streak dài nhất
     best, best_rng, run_start, run = 0, None, None, 0
@@ -271,8 +291,12 @@ def compute_stats(days, followers, repos):
         cur, i = cur + 1, i - 1
     cur_rng = (days[i + 1][0], cur_end) if cur else None
 
+    n_contrib, n_repos = others
+    total_cap = f"JAN 1 {from_year or today.year} - PRESENT"
+    if n_contrib:                                # dòng phụ: đóng góp cho repo của người khác
+        total_cap = [total_cap, f"{n_contrib} IN {n_repos} OTHER REPO{'S' if n_repos != 1 else ''}"]
     items = [
-        ("TOTAL CONTRIBUTIONS", total, "#b8860b", f"JAN 1 {today.year} - PRESENT"),
+        ("TOTAL CONTRIBUTIONS", total, "#b8860b", total_cap),
         ("CURRENT STREAK", cur, "#2f6690", span(*cur_rng) if cur else "NO ACTIVE STREAK"),
         ("LONGEST STREAK", best, "#6b46c1", span(*best_rng) if best else "-"),
         ("PUBLIC REPOS", repos, "#3a8a5c", None),
@@ -280,13 +304,34 @@ def compute_stats(days, followers, repos):
     return items, followers
 
 
+def others_contrib(collections, login):
+    """Cộng commit + PR + review + issue trong repo KHÔNG thuộc về `login` (gồm cả repo của tổ chức),
+    gộp qua nhiều năm."""
+    per_repo = {}
+    for coll in collections:
+        for key, group in coll.items():
+            if not key.endswith("ByRepository"):
+                continue
+            for e in group:
+                r = e["repository"]
+                if r["owner"]["login"].lower() != login.lower():
+                    per_repo[r["nameWithOwner"]] = per_repo.get(r["nameWithOwner"], 0) + e["contributions"]["totalCount"]
+    per_repo = {k: v for k, v in per_repo.items() if v > 0}
+    return sum(per_repo.values()), len(per_repo)
+
+
 def fetch_stats(login, token):
-    u = gh_graphql(login, token)
+    this_year = datetime.now(timezone.utc).year
+    past_years = list(range(TOTAL_FROM_YEAR, this_year)) if TOTAL_FROM_YEAR else []
+    u = gh_graphql(login, token, past_years)
+    past_total = sum(u[f"y{y}"]["contributionCalendar"]["totalContributions"] for y in past_years)
     days = [(date.fromisoformat(d["date"]), d["contributionCount"])
             for w in u["contributionsCollection"]["contributionCalendar"]["weeks"]
             for d in w["contributionDays"]]
     days.sort()
-    return compute_stats(days, u["followers"]["totalCount"], u["repositories"]["totalCount"])
+    return compute_stats(days, u["followers"]["totalCount"], u["repositories"]["totalCount"],
+                         others_contrib([u["ytd"]] + [u[f"y{y}"] for y in past_years], login),
+                         past_total, TOTAL_FROM_YEAR if past_years else None)
 
 
 if __name__ == "__main__":
