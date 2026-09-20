@@ -1,0 +1,32 @@
+name: Update profile stats
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"     # mỗi 6 tiếng (giờ UTC), sửa tuỳ ý
+  workflow_dispatch:           # bấm chạy tay ở tab Actions
+
+permissions:
+  contents: write              # để bot commit lại 2 file SVG
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate SVGs from live GitHub data
+        env:
+          # ưu tiên PAT (tính được cả contributions private), không có thì dùng token mặc định
+          STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN || secrets.GITHUB_TOKEN }}
+        run: python animate_svgs.py --user ${{ github.repository_owner }}
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile-banner.svg profile-stats.svg
+          git diff --cached --quiet || (git commit -m "chore: update profile stats" && git push)
