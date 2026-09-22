@@ -18,3 +18,5 @@
 <p align="center">
   <img src="./tech-stack.svg" width="100%" alt="Technical stack"/>
 </p>
+
+<p align="center"> <img src="./projects-row.svg" width="100%" alt="Projects"/> </p>
