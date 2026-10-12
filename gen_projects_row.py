@@ -1,4 +1,5 @@
-import base64, math
+import base64, math, os
+BASE = os.path.dirname(os.path.abspath(__file__))
 
 W = 900
 OUTER_PAD = 22
@@ -65,35 +66,26 @@ def slideshow_animate_tag(i, k, total_dur):
     vs = ";".join(str(v) for v in values)
     return f'<animate attributeName="opacity" values="{vs}" keyTimes="{kt}" dur="{total_dur:.2f}s" repeatCount="indefinite"/>'
 
+def b64set(prefix, names):
+    return [os.path.join(BASE, "b64", n + ".txt") for n in names]
+
 PROJECTS = [
-    {"name": "VitaFlix", "url": "vitaflix.static4j.app",
-     "image_path": [
-         "/home/claude/projects-blue/vitaflix_b64.txt",
-         "/home/claude/projects-blue/vitaflix_b64_2.txt",
-         "/home/claude/projects-blue/vitaflix_b64_3.txt",
-         "/home/claude/projects-blue/vitaflix_b64_4.txt",
-     ],
+    {"name": "NovaLive", "url": "novalive.online",
+     "image_path": b64set("", ["novalive_b64", "novalive_b64_2", "novalive_b64_3", "novalive_b64_4"]),
      "image_is_b64_file": True,
      "status": "LIVE"},
-    {"name": "NovaLive", "url": "novalive.online",
-     "image_path": [
-         "/home/claude/projects-blue/novalive_b64.txt",
-         "/home/claude/projects-blue/novalive_b64_2.txt",
-         "/home/claude/projects-blue/novalive_b64_3.txt",
-         "/home/claude/projects-blue/novalive_b64_4.txt",
-     ],
+    {"name": "OraPOS", "url": "github.com/nguyennan12",
+     "image_path": b64set("", ["orapos_b64_1", "orapos_b64_2", "orapos_b64_3", "orapos_b64_4"]),
      "image_is_b64_file": True,
      "status": "LIVE"},
     {"name": "HotelBook", "url": "hotel.static4j.app",
-     "image_path": [
-         "/home/claude/projects-blue/hotelbook_b64_1.txt",
-         "/home/claude/projects-blue/hotelbook_b64_2.txt",
-         "/home/claude/projects-blue/hotelbook_b64_3.txt",
-         "/home/claude/projects-blue/hotelbook_b64_4.txt",
-     ],
+     "image_path": b64set("", ["hotelbook_b64_1", "hotelbook_b64_2", "hotelbook_b64_3", "hotelbook_b64_4"]),
      "image_is_b64_file": True,
      "status": "LIVE"},
-    {"name": "Dự Án #4", "url": "your-project-4.com", "image_path": None, "status": "SOON"},
+    {"name": "VitaFlix", "url": "vitaflix.static4j.app",
+     "image_path": b64set("", ["vitaflix_b64", "vitaflix_b64_2", "vitaflix_b64_3", "vitaflix_b64_4"]),
+     "image_is_b64_file": True,
+     "status": "LIVE"},
 ]
 
 N = len(PROJECTS)
@@ -222,7 +214,7 @@ svg = (
     f'</svg>\n'
 )
 
-with open('/home/claude/projects-blue/projects-row-v3.svg', 'w', encoding='utf-8') as f:
+with open(os.path.join(BASE, 'projects-row.svg'), 'w', encoding='utf-8') as f:
     f.write(svg)
 
 print("H=", H, "CARD_W=", CARD_W, "CARD_H=", CARD_H)
