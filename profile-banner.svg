@@ -34,7 +34,7 @@
   <g class="a rise" style="--d:.6s">
     <rect x="660" y="138" width="280" height="42" rx="10" fill="#f2f6fa" stroke="#cfd8e3" stroke-width="1.5"/>
     <circle class="pulse" cx="695" cy="159" r="4.5" fill="#b8860b"/>
-    <text x="810" y="165" text-anchor="middle" font-size="14" font-weight="600" letter-spacing="0.5" fill="#33475b">GITHUB&#160;&#183;&#160;2 FOLLOWERS</text>
+    <text x="810" y="165" text-anchor="middle" font-size="14" font-weight="600" letter-spacing="0.5" fill="#33475b">GITHUB&#160;&#183;&#160;1 FOLLOWER</text>
   </g>
 
   <rect class="a growx" style="--d:.95s;--t:.7s;transform-origin:100% 50%" x="740" y="198" width="60" height="4" fill="#2f6690"/>
