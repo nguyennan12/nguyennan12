@@ -30,4 +30,10 @@ jobs:
           git config user.name  "nguyennan12"
           git config user.email "nguyenann1204@gmail.com"
           git add profile-banner.svg profile-stats.svg
-          git diff --cached --quiet || (git commit -m "chore: update profile stats" && git push)
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update profile stats"
+            git push origin "HEAD:${GITHUB_REF_NAME}" || {
+              echo "Push rejected because the branch was updated by another run; skipping."
+              exit 0
+            }
+          fi
